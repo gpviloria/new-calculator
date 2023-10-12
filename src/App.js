@@ -63,7 +63,7 @@ export default function App() {
           result = parseFloat(num1) - parseFloat(num2);
           break;
         case "x":
-          result = parseFloat(num1) * parseFloat(num2);
+          result = parseDouble(num1) * parseDouble(num2);
           break;
         case "÷":
           result = parseFloat(num1) / parseFloat(num2);
