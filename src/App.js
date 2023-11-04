@@ -18,7 +18,7 @@ function CalcDisplay({ display }) {
 }
 
 export default function App() {
-  const [disp, setDisp] = useState(0);
+  const [disp, setDisp] = useState("0");
   const [num1, setNum1] = useState(null);
   const [oper, setOper] = useState(null);
   const [num2, setNum2] = useState(null);
@@ -26,7 +26,7 @@ export default function App() {
   const numberClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
-    var num = value;
+    let num = value;
     if (oper === null) {
       if (num1 !== null) {
         num = num1 + num;
@@ -45,8 +45,12 @@ export default function App() {
   const operatorClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
-    setOper(value);
-    setDisp(value);
+
+    // Replace "÷" with "/" for consistency
+    const operator = value === '÷' ? '/' : value;
+
+    setOper(operator);
+    setDisp(operator);
   }
 
   const equalClickHandler = (e) => {
@@ -62,14 +66,14 @@ export default function App() {
         case "-":
           result = parseFloat(num1) - parseFloat(num2);
           break;
-        case "x":
+        case "*":
           result = parseFloat(num1) * parseFloat(num2);
           break;
-        case "÷":
+        case "/":
           result = parseFloat(num1) / parseFloat(num2);
           break;
         case "^":
-          result = Math.pow(parseFloat(num1), parseFloat(num2));
+          result = Math.pow(parseFloat(num1), parseFloat(num2);
           break;
         case "%":
           result = parseFloat(num1) % parseFloat(num2);
@@ -88,26 +92,21 @@ export default function App() {
   const clearClickHandler = (e) => {
     e.preventDefault();
 
-    setDisp(0);
+    setDisp("0");
     setNum1(null);
     setOper(null);
     setNum2(null);
   }
 
-  {/*const nameClickHandler = (e) => {
-    e.preventDefault();
-    setDisp("Gino Viloria");
-  }*/}
-
   const decimalClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
-    if (!disp.includes('.')) {
+    if (!disp.includes('.') && value === '.') {
       setDisp(disp + value);
       if (oper === null) {
-        setNum1(num1 === null ? value : num1 + value);
+        setNum1(num1 === null ? '0.' : num1 + value);
       } else {
-        setNum2(num2 === null ? value : num2 + value);
+        setNum2(num2 === null ? '0.' : num2 + value);
       }
     }
   }
@@ -123,7 +122,6 @@ export default function App() {
   }
 
   return (
-   
     <div className="App">
       <div className="CalcContainer">
         <h1>New Calculator</h1>
@@ -133,30 +131,23 @@ export default function App() {
           <CalcButton label={"%"} onClick={operatorClickHandler} />
           <CalcButton label={"±"} onClick={negateClickHandler} />
           <CalcButton label={"/"} onClick={operatorClickHandler} />
-          <CalcButton label={7} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
-          <CalcButton label={8} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
-          <CalcButton label={9} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
+          <CalcButton label={7} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
+          <CalcButton label={8} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
+          <CalcButton label={9} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
           <CalcButton label={"*"} onClick={operatorClickHandler} />
-          <CalcButton label={4} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
-          <CalcButton label={5} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
-          <CalcButton label={6} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
+          <CalcButton label={4} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
+          <CalcButton label={5} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
+          <CalcButton label={6} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
           <CalcButton label={"+"} onClick={operatorClickHandler} />
-          <CalcButton label={1} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
-          <CalcButton label={2} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
-          <CalcButton label={3} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
+          <CalcButton label={1} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
+          <CalcButton label={2} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
+          <CalcButton label={3} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
           <CalcButton label={"-"} onClick={operatorClickHandler} />
           <CalcButton label={"C"} onClick={clearClickHandler} />
-          <CalcButton label={0} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"}/>
+          <CalcButton label={0} onClick={numberClickHandler} buttonClassName={"CalcButtonNum"} />
           <CalcButton label={"."} onClick={decimalClickHandler} />
           <CalcButton label={"="} onClick={equalClickHandler} />
         </div>
-        {/*<div className="Name">
-          <CalcButton
-            label={"VILORIA"}
-            onClick={nameClickHandler}
-            buttonClassName={"CalcButtonName"}
-          />
-        </div>*/}
       </div>
     </div>
   );
