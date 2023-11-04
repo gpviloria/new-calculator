@@ -90,7 +90,7 @@ export default function App() {
       }
 
       // Format the result to have a fixed number of decimal places
-      result = result.toFixed(2); // Adjust the number of decimal places as needed
+      result = parseFloat(result.toFixed(2)); 
 
       setDisp(result.toString());
       setNum1(result.toString());
