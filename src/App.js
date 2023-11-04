@@ -89,8 +89,8 @@ export default function App() {
           result = "ERROR";
       }
 
-      // Format the result to have a fixed number of decimal places
-      result = parseFloat(result.toFixed(2)); 
+      // Format the result based on the presence of decimal places
+      result = Number.isInteger(result) ? result.toFixed(0) : result.toFixed(2);
 
       setDisp(result.toString());
       setNum1(result.toString());
